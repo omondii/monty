@@ -44,5 +44,5 @@ int execute(stack_t **stack, char *content, unsigned int count, FILE *file)
 		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
-	return (0);
+	return (1);
 }
