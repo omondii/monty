@@ -1,6 +1,6 @@
 #include "monty.h"
 /**
- *nop - does nothing
+ *f_nop - does nothing
  *@head: pointer to the first element in stack
  *@count: line number
  */

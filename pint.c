@@ -1,6 +1,6 @@
 #include "monty.h"
 /**
- *_peek - prints the value at the top of the stack
+ *f_peek - prints the value at the top of the stack
  *@head: pointer to the first items location in memory
  *@count: line number
  *Return: Nothing(void)

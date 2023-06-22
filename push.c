@@ -1,6 +1,6 @@
 #include "monty.h"
 /**
- *_push - pushes an element to the stack
+ *f_push - pushes an element to the stack
  *@head: pointer to the first node location in memory
  *@n: data to be pushed into the stack
  *Return: Nothing (void)

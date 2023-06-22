@@ -1,6 +1,6 @@
 #include "monty.h"
 /**
- *_pop - removes the top element of the stack
+ *f_pop - removes the top element of the stack
  *@head: pointer to the first items location in memory
  *@count: line number
  *Return: Nothing (void)
