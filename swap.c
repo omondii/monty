@@ -7,26 +7,22 @@
  */
 void f_swap(stack_t **head, unsigned int count)
 {
-	stack_t *top;
-	int len, current;
+	stack_t *top, *next;
+	int current;
 
 	top = *head;
-	len = 0;
+	if (top == NULL) {
+		fprintf(stderr, "L%u: can't swap, stack too short\n", count);
+		return;
+	}
 
-	while (top)
-	{
-		top = top->next;
-		len++;
+	next = top->next;
+	if (next == NULL) {
+		fprintf(stderr, "L%u: can't swap, stack too short\n", count);
+		return;
 	}
-	if (len < 2)
-	{
-		fprintf(stderr, "L%d: can't swap, stack too short\n", count);
-		fclose(com.file);
-		free(com.content);
-		free_stack(*head);
-		exit(EXIT_FAILURE);
-	}
+
 	current = top->n;
-	top->n = top->next->n;
-	top->next->n = current;
+	top->n = next->n;
+	next->n = current;
 }

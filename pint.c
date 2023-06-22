@@ -10,10 +10,7 @@ void f_peek(stack_t **head, unsigned int count)
 	if (*head == NULL)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", count);
-		fclose(com.file);
-		free(com.content);
-		free_stack(*head);
-		exit(EXIT_FAILURE);
+		return;
 	}
 	printf("%d\n", (*head)->n);
 }

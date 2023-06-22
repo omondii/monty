@@ -17,17 +17,17 @@ int execute(stack_t **stack, char *content, unsigned int count, FILE *file)
 		{"push", f_push}, {"pall", f_display},
 		{"pint", f_peek}, {"pop", f_pop},
 		{"swap", f_swap}, {"add", f_sum},
-		{NULL , NULL}
+		{NULL, NULL}
 	};
 
-	token = strtok(content, "\n\t");
+	token = strtok(content, " \t\n");
 	if (token && token[0] == '#')
 		return (0);
 
 	com.args = strtok(NULL, "\n\t");
 
 	i = 0;
-	while (moncmd[i].opcode &&token)
+	while (moncmd[i].opcode && token)
 	{
 		if (strcmp(token, moncmd[i].opcode) == 0)
 		{
@@ -37,13 +37,12 @@ int execute(stack_t **stack, char *content, unsigned int count, FILE *file)
 		i++;
 	}
 	if (token && moncmd[i].opcode == NULL)
-        {
-                fprintf(stderr,"L%d: unknown instructions %s\n", count,
-                        token);
-                fclose(file);
-                free(content);
-                free_stack(*stack);
-                exit(EXIT_FAILURE);
-        }
+	{
+		fprintf(stderr, "L%d: unknown instructions %s\n", count, token);
+		fclose(file);
+		free(content);
+		free_stack(*stack);
+		exit(EXIT_FAILURE);
+	}
 	return (0);
 }
