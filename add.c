@@ -8,26 +8,25 @@
  */
 void f_sum(stack_t **head, unsigned int count)
 {
-	stack_t *top;
-	int len, current;
+        stack_t *top, *temp;
+        int len, current;
 
-	top = *head;
-	count = 0;
-	while (top)
-	{
-		top = top->next;
-		len++;
-	}
-	if (len < 2)
-	{
-		fprintf(stderr, "L%d: can't add, stack too short\n", count);
-		fclose(com.file);
-		free(com.content);
-		free_stack(*head);
-		exit(EXIT_FAILURE);
-	}
-	current = top->n + top->next->n;
-	top->next->n = current;
-	*head = top->next;
-	free(top);
+        top = *head;
+        len = 0;
+        while (top && top->next)
+        {
+                top = top->next;
+                len++;
+        }
+        if (len < 2)
+        {
+                fprintf(stderr, "L%d: can't add, stack too short\n", count);
+                exit(EXIT_FAILURE);
+        }
+        current = top->n + top->next->n;
+        top->next->n = current;
+
+	temp = top->next;
+	top->next = temp->next;
+	free(temp);
 }
