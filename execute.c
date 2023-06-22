@@ -1,5 +1,4 @@
 #include "monty.h"
-comm_t com = {NULL, NULL, NULL, 0};
 /**
  *execute - parses the entered command, and compares each token to
  *to moncmd[]
