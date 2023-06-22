@@ -55,8 +55,8 @@ typedef struct comm_s
 	char * content;
 	int lineno;
 } comm_t;
-extern comm_t com;
 
+extern comm_t com;
 ssize_t getstdin(char **lineptr, int file);
 void f_push(stack_t **head, unsigned int n);
 void f_display(stack_t **head, unsigned int count);
