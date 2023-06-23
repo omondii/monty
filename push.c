@@ -17,10 +17,12 @@ void f_push(stack_t **head, unsigned int n)
 		printf("Error\n");
 		exit(0);
 	}
-	if (current)
-		current->prev = new;
+
 	new->n = n;
 	new->next = current;
 	new->prev = NULL;
+
+	if (current)
+		current->prev = new;
 	*head = new;
 }

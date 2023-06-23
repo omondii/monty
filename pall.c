@@ -16,7 +16,7 @@ void f_display(stack_t **head, unsigned int count)
 		fprintf(stderr, "L%u: can't pint, stack empty\n", count);
 		exit(EXIT_FAILURE);
 	}
-	while (top)
+	while (top != NULL)
 	{
 		printf("%d\n", top->n);
 		top = top->next;
