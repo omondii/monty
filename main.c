@@ -34,9 +34,10 @@ int main(int argc, char *argv[])
 		read_line = getline(&content, &size, file);
 		com.content = content;
 		count++;
+
 		if (read_line > 0)
 		{
-			if (execute(&stack, content, count, file) == 0);
+			if (execute(&stack, content, count, file) == 0)
 			{
 				fprintf(stderr, "USAGE: monty file\n");
 				free(content);
