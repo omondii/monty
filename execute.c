@@ -5,7 +5,6 @@
  *@stack: pointer to a stack implementation
  *@content: arguments to parse and compare
  *@count: line number being executed
- *@file: pointer to the file being operatd on
  *Return: on success (0), on fail (1)
  */
 void execute(stack_t **stack, char *content, unsigned int count)

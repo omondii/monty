@@ -54,6 +54,7 @@ typedef struct global_s
 } global_t;
 extern global_t *global_var;
 
+void check_arguments(int argc, char *argv[]);
 void f_stack(stack_t **head, unsigned int count);
 ssize_t getstdin(char **lineptr, int file);
 void f_push(stack_t **head, unsigned int n);

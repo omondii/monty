@@ -7,7 +7,7 @@ global_t *global_var = NULL;
  *@argv: arguments passed to main
  *Return: On succes return 1
  */
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
 	FILE *file;
 	size_t size = 0;
@@ -17,31 +17,16 @@ int main(int argc, char **argv)
 	stack_t *stack = NULL;
 	char *saveptr = NULL;
 	char *token;
-	/* check if the correct number of arguments is provided and open the
-	 *monty bytecode file */
-	if (argc != 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
-	file = fopen(argv[1], "r");
-	if (!file)
-	{
-		fprintf(stderr, "Error: can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
+
 	global_var = malloc(sizeof(global_t));
-	if (!global_var)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
+	check_arguments(argc, argv);
+	file = fopen(argv[1], "r");
 	global_var->argument = NULL;
 
 	while ((readline = getline(&content, &size, file)) != -1)
 	{
 		count++;
-		if (content[readline - 1] == '\n') /* remove newline character if present */ 
+		if (content[readline - 1] == '\n')
 			content[readline - 1] = '\0';
 
 		if (content != NULL && content[0] != '#')
