@@ -40,11 +40,10 @@ int main(int argc, char *argv[])
 			if (execute(&stack, content, count, file) == 0)
 			{
 				fprintf(stderr, "USAGE: monty file\n");
-				free(content);
-				free_stack(stack);
 				exit(EXIT_FAILURE);
 			}
 		}
+		free(content);
 	}
 	free_stack(stack);
 	return (0);

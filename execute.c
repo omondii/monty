@@ -24,7 +24,7 @@ int execute(stack_t **stack, char *content, unsigned int count, FILE *file)
 	if (token && token[0] == '#')
 		return (0);
 
-	com.args = strtok(NULL, "\n\t");
+	com.args = strtok(NULL, " \n\t");
 
 	i = 0;
 	while (moncmd[i].opcode && token)
