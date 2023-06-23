@@ -36,7 +36,13 @@ int main(int argc, char *argv[])
 		count++;
 		if (read_line > 0)
 		{
-			execute(&stack, content, count, file);
+			if (execute(&stack, content, count, file) == 0);
+			{
+				fprintf(stderr, "USAGE: monty file\n");
+				free(content);
+				free_stack(stack);
+				exit(EXIT_FAILURE);
+			}
 		}
 	}
 	free_stack(stack);
