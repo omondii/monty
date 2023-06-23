@@ -8,26 +8,19 @@
  */
 void f_sum(stack_t **head, unsigned int count)
 {
-	stack_t *top, *temp;
-	int len, current;
+	stack_t *top, *next;
 
-	top = *head;
-	len = 0;
-
-	while (top && top->next)
-	{
-		top = top->next;
-		len++;
-	}
-	if (len < 2)
+	if (!head || !(*head) || !((*head)->next))
 	{
 		fprintf(stderr, "L%d: can't add, stack too short\n", count);
 		exit(EXIT_FAILURE);
 	}
-	current = top->n + top->next->n;
-	top->next->n = current;
+	top = *head;
+	next = top->next;
 
-	temp = top->next;
-	top->next = temp->next;
-	free(temp);
+	next->n += top->n;
+	*head = next;
+	next->prev = NULL;
+
+	free(top);
 }

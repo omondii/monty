@@ -48,15 +48,12 @@ typedef struct instruction_s
  *@content: contents of the file being processed
  *@lineno: line number being processed
  */
-typedef struct comm_s
+typedef struct global_s
 {
-	char *args;
-	FILE *file;
-	char * content;
-	int lineno;
-} comm_t;
+	char *argument;
+} global_t;
+extern global_t *global_var;
 
-extern comm_t com;
 void f_stack(stack_t **head, unsigned int count);
 ssize_t getstdin(char **lineptr, int file);
 void f_push(stack_t **head, unsigned int n);
@@ -67,5 +64,5 @@ void f_swap(stack_t **head, unsigned int n);
 void f_sum(stack_t **head, unsigned int n);
 void f_nop(stack_t **head, unsigned int count);
 void free_stack(stack_t *head);
-int execute(stack_t **head, char *content, unsigned int count, FILE *file);
+void execute(stack_t **head, char *content, unsigned int count);
 #endif
