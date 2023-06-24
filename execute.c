@@ -10,6 +10,7 @@
 void execute(stack_t **stack, char *content, unsigned int count)
 {
 	unsigned int i;
+	int found;
 
 	instruction_t opcomm[] = {
 		{"push", f_push}, {"pall", f_display},
@@ -17,6 +18,7 @@ void execute(stack_t **stack, char *content, unsigned int count)
 		{"swap", f_swap}, {"add", f_sum},
 		{"stack", f_stack}, {NULL, NULL}
 	};
+	found = 0;
 	for (i = 0; opcomm[i].opcode != NULL; i++)
 	{
 		if (strcmp(content, opcomm[i].opcode) == 0)
@@ -25,6 +27,10 @@ void execute(stack_t **stack, char *content, unsigned int count)
 			return;
 		}
 	}
-	fprintf(stderr, "L%d: unknown instruction %s\n", count, content);
-	exit(EXIT_FAILURE);
+	if (!found)
+	{
+		fprintf(stderr, "L%d: unknown instruction %s\n", count, content);
+		free_stack(*stack);
+		exit(EXIT_FAILURE);
+	}
 }

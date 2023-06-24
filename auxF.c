@@ -36,7 +36,6 @@ int is_digit(char *argument)
 			continue;
 		}
 		return (0);
-		break;
 	}
 	return (1);
 }
