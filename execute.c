@@ -24,6 +24,7 @@ void execute(stack_t **stack, char *content, unsigned int count)
 		if (strcmp(content, opcomm[i].opcode) == 0)
 		{
 			opcomm[i].f(stack, count);
+			found = 1;
 			return;
 		}
 	}
