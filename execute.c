@@ -9,7 +9,7 @@
  */
 void execute(stack_t **stack, char *content, unsigned int count)
 {
-	int i;
+	unsigned int i;
 
 	instruction_t opcomm[] = {
 		{"push", f_push}, {"pall", f_display},
@@ -17,7 +17,7 @@ void execute(stack_t **stack, char *content, unsigned int count)
 		{"swap", f_swap}, {"add", f_sum},
 		{"stack", f_stack}, {NULL, NULL}
 	};
-	for (i = 0; opcomm[i].opcode; i++)
+	for (i = 0; opcomm[i].opcode != NULL; i++)
 	{
 		if (strcmp(content, opcomm[i].opcode) == 0)
 		{

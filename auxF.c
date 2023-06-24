@@ -10,7 +10,7 @@ void check_arguments(int argc, char *argv[])
 
 	file = fopen(argv[1], "r");
 
-	if (argc != 2 || !(file))
+	if (argc != 2 || file == NULL)
 	{
 		fprintf(stderr, "Error: ");
 		if (argc != 2)
@@ -24,6 +24,8 @@ void check_arguments(int argc, char *argv[])
 int is_digit(char *argument)
 {
 	int i;
+	if (argument[0] == '\0')
+		return(0);
 
 	i = 0;
 	while (argument[i] != '\0')
@@ -46,13 +48,17 @@ int ispositive(char *argument)
 	i = 0;
 	while (argument[i] != '\0')
 	{
-		if ((argument[i] <= 0))
+		if ((argument[i] <= '0'))
 		{
 			i++;
 			continue;
 		}
-		exit(EXIT_FAILURE);
 		break;
+	}
+	if (argument[i] != '\0')
+	{
+		fprintf(stderr, "Error: Non-positive integer detected\n");
+		exit(EXIT_FAILURE);
 	}
 	return (1);
 }
