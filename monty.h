@@ -66,4 +66,6 @@ void f_sum(stack_t **head, unsigned int n);
 void f_nop(stack_t **head, unsigned int count);
 void free_stack(stack_t *head);
 void execute(stack_t **head, char *content, unsigned int count);
+int ispositive(char *argument);
+int is_digit(char *argument);
 #endif

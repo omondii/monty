@@ -32,8 +32,8 @@ int main(int argc, char *argv[])
 		if (content != NULL && content[0] != '#')
 		{
 			token = strtok_r(content, " \t", &saveptr);
-			global_var->argument = token;
-			execute(&stack, content, count);
+			global_var->argument = strtok_r(NULL, " \t", &saveptr);
+			execute(&stack, token, count);
 		}
 		free(content);
 		content = NULL;

@@ -20,3 +20,39 @@ void check_arguments(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 }
+
+int is_digit(char *argument)
+{
+	int i;
+
+	i = 0;
+	while (argument[i] != '\0')
+	{
+		if (isdigit(argument[i]))
+		{
+			i++;
+			continue;
+		}
+		return (0);
+		break;
+	}
+	return (1);
+}
+
+int ispositive(char *argument)
+{
+	int i;
+
+	i = 0;
+	while (argument[i] != '\0')
+	{
+		if ((argument[i] < 0))
+		{
+			i++;
+			continue;
+		}
+		exit(EXIT_FAILURE);
+		break;
+	}
+	return (1);
+}
