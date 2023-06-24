@@ -8,23 +8,22 @@
 void f_swap(stack_t **head, unsigned int count)
 {
 	stack_t *top, *next;
-	int current;
 
 	top = *head;
-	if (top == NULL)
+	next = (*head)->next;
+	if (top == NULL || next == NULL)
 	{
 		fprintf(stderr, "L%u: can't swap, stack too short\n", count);
-		return;
+		exit(EXIT_FAILURE);
 	}
 
-	next = top->next;
-	if (next == NULL)
-	{
-		fprintf(stderr, "L%u: can't swap, stack too short\n", count);
-		return;
-	}
+	top->next = next->next;
+	if (top->next)
+		top->next->prev = top;
+	next->prev = NULL;
+	next->next = top;
+	top->prev = next;
 
-	current = top->n;
-	top->n = next->n;
-	next->n = current;
+	*head = next;
+
 }
