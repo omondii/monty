@@ -19,6 +19,11 @@ int main(int argc, char *argv[])
 	char *token;
 
 	global_var = malloc(sizeof(global_t));
+	if (global_var == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
 	check_arguments(argc, argv);
 	file = fopen(argv[1], "r");
 	global_var->argument = NULL;

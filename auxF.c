@@ -46,7 +46,7 @@ int ispositive(char *argument)
 	i = 0;
 	while (argument[i] != '\0')
 	{
-		if ((argument[i] < 0))
+		if ((argument[i] <= 0))
 		{
 			i++;
 			continue;

@@ -7,7 +7,7 @@
  */
 void f_push(stack_t **head, unsigned int count)
 {
-	stack_t *new;
+	stack_t *new = NULL;
 
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)

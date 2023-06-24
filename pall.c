@@ -8,7 +8,6 @@
 void f_display(stack_t **head, unsigned int count)
 {
 	stack_t *top;
-	(void)count;
 
 	top = *head;
 	if (top == NULL)
