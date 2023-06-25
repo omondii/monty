@@ -34,11 +34,11 @@ void f_sub(stack_t **head, unsigned int count)
 {
 	stack_t *top, *next;
 
-        if (!head || !(*head) || !((*head)->next))
-        {
+	if (!head || !(*head) || !((*head)->next))
+	{
 		fprintf(stderr, "L%d: can't sub, stack too short\n", count);
 		exit(EXIT_FAILURE);
-        }
+	}
 
 	top = *head;
 	next = top->next;
