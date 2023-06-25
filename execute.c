@@ -17,7 +17,7 @@ void execute(stack_t **stack, char *content, unsigned int count)
 		{"pint", f_peek}, {"pop", f_pop},
 		{"swap", f_swap}, {"add", f_sum},
 		{"stack", f_stack}, {"sub", f_sub},
-		{NULL, NULL}
+		{"div", f_div}, {NULL, NULL}
 	};
 	opcode = strtok(content, " \t\n");
 
