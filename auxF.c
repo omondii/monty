@@ -7,6 +7,7 @@
 FILE *openfile(char *montyfile)
 {
 	FILE *file;
+
 	global_var->status = EXIT_SUCCESS;
 
 	file = fopen(montyfile, "r");
@@ -47,8 +48,9 @@ void check_arguments(int argc, char *argv[])
 int is_digit(char *argument)
 {
 	int i;
+
 	if (argument[0] == '\0')
-		return(0);
+		return (0);
 
 	i = 0;
 	while (argument[i] != '\0')
@@ -64,7 +66,7 @@ int is_digit(char *argument)
 }
 /**
  *ispositive - checks if number given is positive
- *@argumennt: digit to check
+ *@argument: digit to check
  *Return: if true (1) else (0)
  */
 int ispositive(char *argument)

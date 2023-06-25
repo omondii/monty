@@ -18,8 +18,6 @@ void execute(stack_t **stack, char *content, unsigned int count)
 		{"swap", f_swap}, {"add", f_sum},
 		{"stack", f_stack}, {NULL, NULL}
 	};
-	global_var->status = EXIT_SUCCESS;
-
 	opcode = strtok(content, " \t\n");
 
 	if (opcode != NULL)
@@ -40,7 +38,7 @@ void execute(stack_t **stack, char *content, unsigned int count)
 					global_var->argument = argument;
 				}
 				opcomm[i].f(stack, count);
-				break;
+				return;
 			}
 		}
 		if (opcomm[i].opcode == NULL)
@@ -50,37 +48,4 @@ void execute(stack_t **stack, char *content, unsigned int count)
 			global_var->status = EXIT_FAILURE;
 		}
 	}
-	if (global_var->status == EXIT_FAILURE)
-	{
-                exit(EXIT_FAILURE);
-        }
-}
-/**
- *readfile - reads the montyfile opened
- *@file: pointer to the montyfile to open
- *Return: Status
- */
-int readfile(FILE *file)
-{
-	char *content = NULL;
-	size_t size = 0;
-	unsigned int count = 0;
-	stack_t *stack = NULL;
-	int status = EXIT_SUCCESS;
-	ssize_t line_length;
-
-	while (((line_length = getline(&content, &size, file)) != -1))
-	{
-		count ++;
-		content[line_length - 1] = '\0';
-		execute(&stack, content, count);
-		if (global_var->status == EXIT_FAILURE)
-		{
-			status = EXIT_FAILURE;
-			break;
-		}
-	}
-	free(content);
-	free_stack(stack);
-	return (status);
 }
