@@ -43,17 +43,20 @@ typedef struct instruction_s
 /**
  *struct comm_s - contains args, file, content and line content passed
  to the program. Used by monty
- *@args: arguments passed to main
- *@file: file to process
- *@content: contents of the file being processed
- *@lineno: line number being processed
+ *@argument: argument passed to main.c
+ *@status: stores the exit code of the functions
  */
 typedef struct global_s
 {
 	char *argument;
+	int status;
 } global_t;
 extern global_t *global_var;
 
+int readfile(FILE *file);
+FILE *openfile(char *montyfile);
+int caller(stack_t **stack, char *opcode, stack_t **argument,
+           unsigned int count);
 void check_arguments(int argc, char *argv[]);
 void f_stack(stack_t **head, unsigned int count);
 ssize_t getstdin(char **lineptr, int file);

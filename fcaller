@@ -1,0 +1,44 @@
+#include "monty.h"
+/**
+ *caller - calls function that matches given opcode
+ *@stack: pointer to the head of the stack
+ *@opcode: opcode passed
+ *@argument: global var to hold the argument
+ *@count: line number in the file
+ *Return: status
+ */
+int caller(stack_t **stack, char *opcode, stack_t **argument,
+	   unsigned int count)
+{
+	global_var->status = EXIT_SUCCESS;
+
+	if (strcmp(opcode, "pint") == 0)
+	{
+		global_var->status = f_display(stack, count);
+	}
+	else if (strcmp(opcode, "pall") == 0)
+	{
+		global_var->status = f_display(stack, count);
+	}
+	else if (strcmp(opcode, "push") == 0)
+	{
+		global_var->status = f_push(stack, count);
+	}
+	else if (strcmp(opcode, "pop") == 0)
+	{
+		global_var->status = f_pop(stack, count);
+	}
+	else if (strcmp(opcode, "add") == 0)
+	{
+		global_var->status = f_sum(stack, count);
+	}
+	else if (strcmp(opcode, "swap") == 0)
+	{
+		global_var->status = f_swap(stack, count);
+	}
+	else if (strcmp(opcode, "nop") == 0)
+	{
+		f_nop(stack, count);
+	}
+	return (global_var->status);
+}

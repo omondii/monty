@@ -9,45 +9,35 @@ global_t *global_var = NULL;
  */
 int main(int argc, char *argv[])
 {
-	FILE *file;
-	size_t size = 0;
-	ssize_t readline;
-	unsigned int count = 0;
-	char *content = NULL;
-	stack_t *stack = NULL;
-	char *saveptr = NULL;
-	char *token;
+	char *montyfile = NULL;
+	FILE *file = NULL;
+	int status = EXIT_SUCCESS;
 
-	global_var = malloc(sizeof(global_t));
-	if (global_var == NULL)
+	if (argc != 2)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	check_arguments(argc, argv);
-	file = fopen(argv[1], "r");
-	global_var->argument = NULL;
-
-	while ((readline = getline(&content, &size, file)) != -1)
+	else
 	{
-		count++;
-		if (content[readline - 1] == '\n')
-			content[readline - 1] = '\0';
-
-		if (content != NULL && content[0] != '#')
+		montyfile = argv[1];
+		file = fopen(montyfile, "r");
+		if (file == NULL)
 		{
-			token = strtok_r(content, " \t", &saveptr);
-			global_var->argument = strtok_r(NULL, " \t", &saveptr);
-			execute(&stack, token, count);
+			status = EXIT_FAILURE;
 		}
-		free(content);
-		content = NULL;
-		size = 0;
+		else
+		{
+			global_var = malloc(sizeof(global_t));
+			if (global_var == NULL)
+			{
+				fprintf(stderr, "Error: memory allocation failed\n");
+				exit(EXIT_FAILURE);
+			}
+			status = readfile(file);
+			fclose(file);
+			free(global_var);
+		}
 	}
-	fclose(file);
-	free(global_var);
-	free_stack(stack);
-	free(content);
-
-	return (EXIT_SUCCESS);
+	return (status);
 }

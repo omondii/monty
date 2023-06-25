@@ -1,5 +1,23 @@
 #include "monty.h"
 /**
+ *openfile - opens a montyfile
+ *@montyfile: file to open
+ *Return: if success (montyfile) else exit_failure
+ */
+FILE *openfile(char *montyfile)
+{
+	FILE *file;
+	global_var->status = EXIT_SUCCESS;
+
+	file = fopen(montyfile, "r");
+	if (file == NULL)
+	{
+		fprintf(stderr, "Error: can't open file %s\n", montyfile);
+		global_var->status = EXIT_FAILURE;
+	}
+	return (file);
+}
+/**
  *check_arguments -check the argmunents passed if they meet monty usage
  *@argc: number of passed args
  *@argv: arguments passed
@@ -17,10 +35,15 @@ void check_arguments(int argc, char *argv[])
 			fprintf(stderr, "USAGE: monty file\n");
 		else
 			fprintf(stderr, "Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
+
+		global_var->status = EXIT_FAILURE;
 	}
 }
-
+/**
+ *is_digit- checks if the argmunet passed is a digit
+ *@argument: passed argument
+ *Return: if true (1) else (0)
+ */
 int is_digit(char *argument)
 {
 	int i;
@@ -39,7 +62,11 @@ int is_digit(char *argument)
 	}
 	return (1);
 }
-
+/**
+ *ispositive - checks if number given is positive
+ *@argumennt: digit to check
+ *Return: if true (1) else (0)
+ */
 int ispositive(char *argument)
 {
 	int i;

@@ -10,7 +10,7 @@
 void execute(stack_t **stack, char *content, unsigned int count)
 {
 	unsigned int i;
-	int found;
+	char *opcode, *argument = NULL;
 
 	instruction_t opcomm[] = {
 		{"push", f_push}, {"pall", f_display},
@@ -18,20 +18,69 @@ void execute(stack_t **stack, char *content, unsigned int count)
 		{"swap", f_swap}, {"add", f_sum},
 		{"stack", f_stack}, {NULL, NULL}
 	};
-	found = 0;
-	for (i = 0; opcomm[i].opcode != NULL; i++)
+	global_var->status = EXIT_SUCCESS;
+
+	opcode = strtok(content, " \t\n");
+
+	if (opcode != NULL)
 	{
-		if (strcmp(content, opcomm[i].opcode) == 0)
+		for (i = 0; opcomm[i].opcode != NULL; i++)
 		{
-			opcomm[i].f(stack, count);
-			found = 1;
-			return;
+			if (strcmp(opcomm[i].opcode, opcode) == 0)
+			{
+				if (strcmp(opcode, "push") == 0)
+				{
+					argument = strtok(NULL, " \t\n");
+					if (argument == NULL)
+					{
+						fprintf(stderr, "L%d: usage: push integer\n", count);
+						global_var->status = EXIT_FAILURE;
+						break;
+					}
+					global_var->argument = argument;
+				}
+				opcomm[i].f(stack, count);
+				break;
+			}
+		}
+		if (opcomm[i].opcode == NULL)
+		{
+			fprintf(stderr, "L%d: unknown instruction %s\n",
+				count, opcode);
+			global_var->status = EXIT_FAILURE;
 		}
 	}
-	if (!found)
+	if (global_var->status == EXIT_FAILURE)
 	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", count, content);
-		free_stack(*stack);
-		exit(EXIT_FAILURE);
+                exit(EXIT_FAILURE);
+        }
+}
+/**
+ *readfile - reads the montyfile opened
+ *@file: pointer to the montyfile to open
+ *Return: Status
+ */
+int readfile(FILE *file)
+{
+	char *content = NULL;
+	size_t size = 0;
+	unsigned int count = 0;
+	stack_t *stack = NULL;
+	int status = EXIT_SUCCESS;
+	ssize_t line_length;
+
+	while (((line_length = getline(&content, &size, file)) != -1))
+	{
+		count ++;
+		content[line_length - 1] = '\0';
+		execute(&stack, content, count);
+		if (global_var->status == EXIT_FAILURE)
+		{
+			status = EXIT_FAILURE;
+			break;
+		}
 	}
+	free(content);
+	free_stack(stack);
+	return (status);
 }

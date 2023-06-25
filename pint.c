@@ -7,10 +7,11 @@
  */
 void f_peek(stack_t **head, unsigned int count)
 {
+	global_var->status = EXIT_SUCCESS;
 	if (*head == NULL)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", count);
-		return;
+		global_var->status = EXIT_FAILURE;
 	}
 	printf("%d\n", (*head)->n);
 }

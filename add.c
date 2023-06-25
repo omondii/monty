@@ -18,9 +18,9 @@ void f_sum(stack_t **head, unsigned int count)
 	top = *head;
 	next = top->next;
 
-	next->n += top->n;
-	*head = next;
+	top->n += next->n;
+	*head = top;
 	next->prev = NULL;
 
-	free(top);
+	free(next);
 }
