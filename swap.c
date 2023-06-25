@@ -11,7 +11,7 @@ void f_swap(stack_t **head, unsigned int count)
 
 	if (!head || !(*head) || !((*head)->next))
 	{
-		fprintf(stderr, "L%d: can't sub, stack too short\n", count);
+		fprintf(stderr, "L%d: can't swap, stack too short\n", count);
 		exit(EXIT_FAILURE);
 	}
 
