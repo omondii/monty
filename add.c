@@ -19,10 +19,10 @@ void f_sum(stack_t **head, unsigned int count)
 	next = top->next;
 
 	top->n += next->n;
-	*head = top;
-	next->prev = NULL;
+	*head = next;
+	next->prev = top;
 
-	free(next);
+	free(top);
 }
 /**
  *f_sub - subtracts the top element from the 2nd element
