@@ -9,21 +9,21 @@ void f_swap(stack_t **head, unsigned int count)
 {
 	stack_t *top, *next;
 
-	top = *head;
-	next = (*head)->next;
-	if (top == NULL || next == NULL)
+	if (!head || !(*head) || !((*head)->next))
 	{
-		fprintf(stderr, "L%u: can't swap, stack too short\n", count);
+		fprintf(stderr, "L%d: can't sub, stack too short\n", count);
 		exit(EXIT_FAILURE);
 	}
 
+	top = *head;
+	next = top->next;
+
 	top->next = next->next;
-	if (top->next)
-		top->next->prev = top;
-	next->prev = NULL;
-	next->next = top;
 	top->prev = next;
+	next->next = top;
+	next->prev = NULL;
 
+	if (top->next != NULL)
+		top->next->prev = top;
 	*head = next;
-
 }
