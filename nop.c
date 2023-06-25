@@ -23,9 +23,13 @@ int readfile(FILE *file)
 	int status = EXIT_SUCCESS;
 	ssize_t line_length;
 
+
 	while (((line_length = getline(&content, &size, file)) != -1))
 	{
 		count++;
+		/* Check for comment */
+		if (content[0] == '#' || content[0] == '\n')
+			continue;
 		content[line_length - 1] = '\0';
 		execute(&stack, content, count);
 		if (global_var->status == EXIT_FAILURE)
@@ -34,6 +38,7 @@ int readfile(FILE *file)
 			break;
 		}
 	}
+
 	free(content);
 	free_stack(stack);
 	return (status);
